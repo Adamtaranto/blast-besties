@@ -20,15 +20,12 @@ import argparse
 from collections import Counter
 from os.path import basename
 
-
 def main(minLen=0, eVal=0.001, recipFile=True, blastAvB=None, blastBvA=None):
-
 	#Read pairs in as list of tuples
 	if blastAvB and blastBvA:
 		readBlast(minLen, eVal, blastAvB, blastBvA, recipFile)
 	else:
 		sys.exit('Must provide two tabbed blast result files.')
-
 
 def readBlast(minLen, eVal, blastTabA, blastTabB, recipFile):
 	#Reads in two blast tab output files and returns a list of pairs which are reciprocal best blast hits.
