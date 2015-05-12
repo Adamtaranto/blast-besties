@@ -3,6 +3,15 @@
 #blastBesties.py
 #Version 1. Adam Taranto, May 2015
 #Contact, Adam Taranto, adam.taranto@anu.edu.au
+#.-. .-')               ('-.      .-')    .-') _          .-. .-')    ('-.    .-')    .-') _             ('-.    .-')    
+#\  ( OO )             ( OO ).-. ( OO ). (  OO) )         \  ( OO ) _(  OO)  ( OO ). (  OO) )          _(  OO)  ( OO ).  
+# ;-----.\  ,--.       / . --. /(_)---\_)/     '._         ;-----.\(,------.(_)---\_)/     '._ ,-.-') (,------.(_)---\_) 
+# | .-.  |  |  |.-')   | \-.  \ /    _ | |'--...__)  .-')  | .-.  | |  .---'/    _ | |'--...__)|  |OO) |  .---'/    _ |  
+# | '-' /_) |  | OO ).-'-'  |  |\  :` `. '--.  .--'_(  OO) | '-' /_)|  |    \  :` `. '--.  .--'|  |  \ |  |    \  :` `.  
+# | .-. `.  |  |`-' | \| |_.'  | '..`''.)   |  |  (,------.| .-. `.(|  '--.  '..`''.)   |  |   |  |(_/(|  '--.  '..`''.) 
+# | |  \  |(|  '---.'  |  .-.  |.-._)   \   |  |   '------'| |  \  ||  .--' .-._)   \   |  |  ,|  |_.' |  .--' .-._)   \ 
+# | '--'  / |      |   |  | |  |\       /   |  |           | '--'  /|  `---.\       /   |  | (_|  |    |  `---.\       / 
+# `------'  `------'   `--' `--' `-----'    `--'           `------' `------' `-----'    `--'   `--'    `------' `-----'  
 
 from __future__ import print_function
 import os
@@ -33,6 +42,12 @@ def readBlast(minLen, eVal, blastTabA, blastTabB, recipFile):
 		for line in cleaned_data:
 			#Ignore lines begining with '#'
 			if line[0][0] == "#":
+				continue
+			#Ignore if eVal is above threshold
+			if float(line[10]) >= eVal:
+				continue
+			#Ignore in hit length is less than threshold
+			if line[3] <= minLen:
 				continue
 			#If first record for this query, store the query:target pair
 			if line[0] != lastQuery:	
@@ -79,7 +94,7 @@ if __name__== '__main__':
 	arg_parser.add_argument("-b", "--blastBvA", help="Blast tab result file for fastaB query against fastaA subject")
 	arg_parser.add_argument("-w", "--recipFile", action='store_true', default=True, help="Write reciprocal blast pairs to file. Default True.")
 	arg_parser.add_argument("-l","--minLen", help="Minimum length of hit to consider valid.")
-	arg_parser.add_argument("-e","--eVal", help="Minimum eval to consider valid pair.")
+	arg_parser.add_argument("-e","--eVal", type=float, help="Minimum eval to consider valid pair.")
 
 	#Parse arguments
 	args = arg_parser.parse_args()
