@@ -12,7 +12,7 @@ Report reciprocal best match pairs where each hit meets criteria evalue <= 0.001
 
 **./blastBesties.py** -e 0.001 -l 100 -s 100 -a *blastAvB.tab* -b *blastBvA.tab*  
 
-Arguements:
+Arguments:
   - **-a, --blastAvB** [BLASTAVB]
     - Blast tab result file for fastaA query against fastaB subject. (Required)
   - **-b, --blastBvA** [BLASTBVA]
