@@ -10,8 +10,9 @@
 # Directories #
 ###############
 devnotes/
-mydata/
-testOutput/
+data/
+test/
+output/
 
 #OutputFiles#
 #############
