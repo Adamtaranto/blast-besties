@@ -1,0 +1,3 @@
+[console_scripts]
+blastbesties = blastbesties.cmd_rbb:main
+
