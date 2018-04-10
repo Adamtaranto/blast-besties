@@ -4,27 +4,36 @@ Rapid discovery of reciprocal best blast pairs from BLAST output files.
 
 
 # Table of contents
-
+* [Install](#install-blast-besties)
 * [Example usage](#example-usage)
   * [Input requirements](#input-requirements)
 * [Standard options](#standard-options)
 * [License](#license) 
 
+# Install Blast-Besties
+
+From github:
+```
+git clone https://github.com/Adamtaranto/blast-besties.git
+cd blast-besties
+pip install -e .
+```
+
 # Example usage
 
 Run BLASTp for each protein set AvsB and BvsA.
-Require vaild alignments to cover 95% of the query sequence and with an e-value of < 0.001.
+Require vaild alignments to cover 90% of the query sequence and with an e-value of < 0.001.
 
 ```bash
-blastp -qcov_hsp_perc 95 -query A_prot.fa -subject B_prot.fa -out AvB.tab -evalue 0.001 -outfmt 6 -use_sw_tback
-blastp -qcov_hsp_perc 95 -query B_prot.fa -subject A_prot.fa -out BVA.tab -evalue 0.001 -outfmt 6 -use_sw_tback
+blastp -qcov_hsp_perc 90 -query A_prot.fa -subject B_prot.fa -out AvB.tab -evalue 0.001 -outfmt 6 -use_sw_tback
+blastp -qcov_hsp_perc 90 -query B_prot.fa -subject A_prot.fa -out BVA.tab -evalue 0.001 -outfmt 6 -use_sw_tback
 ```
 
 Report reciprocal best match pairs where each hit meets criteria e-value 
-<= 0.001, hit-length >= 100, bitscore >= 100.  
+<= 0.001, hit-length >= 40, bitscore >= 100.  
 
 ```bash
-./blastBesties.py -e 0.001 -l 100 -s 100 -a *blastAvB.tab* -b *blastBvA.tab
+blastBesties -e 0.001 -l 40 -s 100 -a AvB.tab -b BvA.tab -o pairs.tab
 ```
 
 ## Input requirements
