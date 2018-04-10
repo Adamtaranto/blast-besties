@@ -43,6 +43,8 @@ def getPairs(blastAvB, blastBvA, minLen=1, eVal=0.001, bitScore=0):
 		cleaned_data = [map(str.strip, line) for line in data]
 		lastQuery = None
 		for line in cleaned_data:
+			# Map yield generator in Py3
+			line = list(line)
 			# Ignore lines begining with '#'
 			if line[0][0] == "#":
 				continue
@@ -63,6 +65,8 @@ def getPairs(blastAvB, blastBvA, minLen=1, eVal=0.001, bitScore=0):
 		cleaned_data = [map(str.strip, line) for line in data]
 		lastQuery = None
 		for line in cleaned_data:
+			# Map yield generator in Py3
+			line = list(line)
 			# Ignore lines begining with '#'
 			if line[0][0] == "#":
 				continue
@@ -79,7 +83,7 @@ def getPairs(blastAvB, blastBvA, minLen=1, eVal=0.001, bitScore=0):
 			# Update previous query ID
 			lastQuery = line[0]
 	# Generator which returns list items that occur more than once
-	recipPairs = [k for (k,v) in Counter(pairs).iteritems() if v > 1]
+	recipPairs = [k for (k,v) in Counter(pairs).items() if v > 1]
 	return recipPairs
 
 def writePairs(recipPairs,outFilePath):
