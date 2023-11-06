@@ -12,6 +12,7 @@
 
 from blastbesties.blastops import getPairs, writePairs
 from blastbesties.utils import outPathCheck
+from blastbesties._version import __version__
 
 import argparse
 
@@ -21,7 +22,11 @@ def mainArgs():
     parser = argparse.ArgumentParser(
         description="Finds reciprocal best blast pairs from BLAST output format 6 (tabular). Where hits are sorted by query name then descending match quality."
     )
-    parser.add_argument("-v", "--version", action="version", version="1.1.1")
+    parser.add_argument(
+        "--version",
+        action="version",
+        version="%(prog)s {version}".format(version=__version__),
+    )
     parser.add_argument(
         "-a",
         "--blastAvB",
