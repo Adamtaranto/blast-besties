@@ -1,25 +1,46 @@
+<a href="https://opensource.org/licenses/MIT">
+<img src="https://img.shields.io/badge/License-MIT-yellow.svg" align="left" height="20"/>
+</a> 
+<br clear="left"/>
+
+
 # Blast-Besties
 
 Rapid discovery of reciprocal best blast pairs from BLAST output files.  
 
 
-# Table of contents
-* [Install](#install-blast-besties)
-* [Example usage](#example-usage)
-  * [Input requirements](#input-requirements)
-* [Standard options](#standard-options)
-* [License](#license) 
+## Table of contents
+- [Blast-Besties](#blast-besties)
+  - [Table of contents](#table-of-contents)
+  - [Install Blast-Besties](#install-blast-besties)
+  - [Example usage](#example-usage)
+    - [Input requirements](#input-requirements)
+    - [Standard options](#standard-options)
+  - [License](#license)
 
-# Install Blast-Besties
+## Install Blast-Besties
 
-From github:
+There are 3 options available for installing Blast-Besties locally:
+
+1) Clone from this repository and install as a local Python package.
+
+```bash
+git clone https://github.com/Adamtaranto/blast-besties.git && cd blast-besties && pip install -e .
 ```
-git clone https://github.com/Adamtaranto/blast-besties.git
-cd blast-besties
-pip install -e .
+
+1) Pip install directly from this git repository.
+
+```bash
+pip install git+https://github.com/Adamtaranto/blast-besties.git
 ```
 
-# Example usage
+3) Install from PyPi.
+
+```bash
+pip install blastbesties
+```
+
+## Example usage
 
 Run BLASTp for each protein set AvsB and BvsA.
 Require vaild alignments to cover 90% of the query sequence and with an e-value of < 0.001.
@@ -36,13 +57,13 @@ Report reciprocal best match pairs where each hit meets criteria e-value
 blastBesties -e 0.001 -l 40 -s 100 -a AvB.tab -b BvA.tab -o pairs.tab
 ```
 
-## Input requirements
+### Input requirements
 
   - Takes two BLAST output files as input. SetA vs SetB, and SetB vs SetA.
   - BLAST output format 6 (tabular)
   - Hits must be sorted by query name then descending match quality - this is default BLAST behaviour.
 
-# Standard options
+### Standard options
 
 ```
 Usage: BLAST-Besties [-h] [-v] -a BLASTAVB -b BLASTBVA [-l MINLEN] [-e EVAL]
@@ -70,7 +91,7 @@ Options:
   -d, --outDir      Directory for new sequence files to be written to.
 ```
 
-# License
+## License
 
 Software provided under MIT license.
 
