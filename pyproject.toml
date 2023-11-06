@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "blastbesties"
+authors = [{ name = "Adam Taranto", email = "adam.p.taranto@gmail.com" }]
+
+description = "Rapid discovery of reciprocal best blast pairs from BLAST output files."
+readme = "README.md"
+requires-python = ">=3.7"
+license = { text = "MIT" }
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "License :: OSI Approved :: MIT License",
+]
+
+dynamic = ["version", "dependencies"]
+
+[tool.setuptools_scm]
+write_to = "src/blastbesties/_version.py"
+
+[tool.setuptools.dynamic]
+
+dependencies = { file = "requirements.txt" }
+
+[project.urls]
+homepage = "https://github.com/adamtaranto/blast-besties"
+documentation = "https://github.com/adamtaranto/blast-besties"
+repository = "https://github.com/adamtaranto/blast-besties"
+
+[project.scripts]
+blast-besties = "blastbesties.app:main"
+
+
+# Create and push tags
+# git tag -a v1.1.2 
+# git push origin v1.1.2
+
+# Check what setuptools_scm thinks the current version is and create _version.py
+# git describe
+# python -m setuptools_scm
+# python setup.py --version
+
+# Build sdist
+# python setup.py sdist 
+
+# Push to pypi
+# twine upload dist/*
