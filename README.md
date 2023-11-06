@@ -54,7 +54,7 @@ Report reciprocal best match pairs where each hit meets criteria e-value
 <= 0.001, hit-length >= 40, bitscore >= 100.  
 
 ```bash
-blastBesties -e 0.001 -l 40 -s 100 -a AvB.tab -b BvA.tab -o pairs.tab
+blastbesties -e 0.001 -l 40 -s 100 -a AvB.tab -b BvA.tab -o pairs.tab
 ```
 
 ### Input requirements
@@ -66,7 +66,7 @@ blastBesties -e 0.001 -l 40 -s 100 -a AvB.tab -b BvA.tab -o pairs.tab
 ### Standard options
 
 ```
-Usage: BLAST-Besties [-h] [-v] -a BLASTAVB -b BLASTBVA [-l MINLEN] [-e EVAL]
+Usage: blastbesties [-h] [-v] -a BLASTAVB -b BLASTBVA [-l MINLEN] [-e EVAL]
                      [-s BITSCORE] [-o OUTFILE] [-d OUTDIR]
 
 Options:

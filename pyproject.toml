@@ -33,7 +33,7 @@ documentation = "https://github.com/adamtaranto/blast-besties"
 repository = "https://github.com/adamtaranto/blast-besties"
 
 [project.scripts]
-blast-besties = "blastbesties.app:main"
+blastbesties = "blastbesties.app:main"
 
 
 # Create and push tags
