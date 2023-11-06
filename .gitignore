@@ -1,7 +1,5 @@
-#Testing
-data/
-temp/
-test/
+#Versioning
+src/blastbesties/_version.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
