@@ -10,11 +10,12 @@
 #  | '--'  / |      |   |  | |  |\       /   |  |           | '--'  /|  `---.\       /   |  | (_|  |    |  `---.\       /
 #  `------'  `------'   `--' `--' `-----'    `--'           `------' `------' `-----'    `--'   `--'    `------' `-----'
 
-from blastbesties.blastops import getPairs, writePairs
-from blastbesties.utils import outPathCheck
+from blastbesties.blastops import getPairs
+from blastbesties.utils import outPathCheck, isfile, writePairs
 from blastbesties._version import __version__
 
 import argparse
+import logging
 
 
 def mainArgs():
@@ -71,6 +72,12 @@ def mainArgs():
         default=None,
         help="Directory for new sequence files to be written to.",
     )
+    parser.add_argument(
+        "--loglevel",
+        default="INFO",
+        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+        help="Set logging level.",
+    )
     # Parse arguments
     args = parser.parse_args()
     # Call main function
@@ -80,6 +87,19 @@ def mainArgs():
 def main():
     # Get cmd line args
     args = mainArgs()
+
+    # Set up logging
+    numeric_level = getattr(logging, args.loglevel.upper(), None)
+
+    if not isinstance(numeric_level, int):
+        raise ValueError("Invalid log level: %s" % args.loglevel)
+
+    logging.basicConfig(
+        format="%(asctime)s:%(levelname)s:%(name)s:%(message)s", level=numeric_level
+    )
+
+    # Check input files exist
+    isfile([args.blastAvB, args.blastBvA])
 
     # Check for output directories
     outFilePath = outPathCheck(args)
@@ -91,3 +111,5 @@ def main():
 
     # Write reciprical best BLAST pairs to output
     writePairs(recipPairs, outFilePath)
+
+    logging.info("Finished")
