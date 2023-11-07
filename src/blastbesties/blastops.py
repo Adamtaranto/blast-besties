@@ -1,8 +1,13 @@
 from collections import Counter
+import logging
 
 
 def getPairs(blastAvB, blastBvA, minLen=1, eVal=0.001, bitScore=0):
     """Reads in two blast tab output files and returns a list of pairs which are reciprocal best blast hits."""
+    logging.info(f"Retriving reciprocal best hits between {blastAvB} and {blastBvA}")
+    logging.info(
+        f"Filtering blast hits: minLen={minLen}, eVal={eVal}, bitScore={bitScore}"
+    )
     pairs = list()
     # Find best A-B pairs
     with open(blastAvB) as src:
@@ -19,7 +24,7 @@ def getPairs(blastAvB, blastBvA, minLen=1, eVal=0.001, bitScore=0):
             if float(line[10]) >= eVal or float(line[11]) <= bitScore:
                 continue
             # Ignore if hit length is less than threshold
-            if line[3] <= minLen:
+            if int(line[3]) <= minLen:
                 continue
             # If first record for this query, store the query:target pair
             if line[0] != lastQuery:
@@ -41,7 +46,7 @@ def getPairs(blastAvB, blastBvA, minLen=1, eVal=0.001, bitScore=0):
             if float(line[10]) >= eVal or float(line[11]) <= bitScore:
                 continue
             # Ignore if hit length is less than threshold
-            if line[3] <= minLen:
+            if int(line[3]) <= minLen:
                 continue
             # If first record for this query, flip query:target pair and store as target:query.
             if line[0] != lastQuery:
@@ -51,19 +56,7 @@ def getPairs(blastAvB, blastBvA, minLen=1, eVal=0.001, bitScore=0):
             lastQuery = line[0]
     # Generator which returns list items that occur more than once
     recipPairs = [k for (k, v) in Counter(pairs).items() if v > 1]
+    logging.info(
+        f"Found {len(recipPairs)} reciprocal best blast pairs passing match criteria."
+    )
     return recipPairs
-
-
-def writePairs(recipPairs, outFilePath):
-    """Write best batch pairs which occur in both BLAST tab files to output file."""
-    # Open handle
-    outFile = open(outFilePath, "w")
-    # Write file header
-    header = "\t".join(["#SetA", "SetB"])
-    outFile.write(header + "\n")
-    # Write pairs
-    for a, b in recipPairs:
-        abPair = "\t".join([a, b])
-        outFile.write(abPair + "\n")
-    # Close handle
-    outFile.close()
