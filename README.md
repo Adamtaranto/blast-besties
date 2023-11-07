@@ -47,7 +47,7 @@ Require vaild alignments to cover 90% of the query sequence and with an e-value 
 
 ```bash
 blastp -qcov_hsp_perc 90 -query A_prot.fa -subject B_prot.fa -out AvB.tab -evalue 0.001 -outfmt 6 -use_sw_tback
-blastp -qcov_hsp_perc 90 -query B_prot.fa -subject A_prot.fa -out BVA.tab -evalue 0.001 -outfmt 6 -use_sw_tback
+blastp -qcov_hsp_perc 90 -query B_prot.fa -subject A_prot.fa -out BvA.tab -evalue 0.001 -outfmt 6 -use_sw_tback
 ```
 
 Report reciprocal best match pairs where each hit meets criteria e-value 
