@@ -1,6 +1,12 @@
 #Versioning
 src/blastbesties/_version.py
 
+#Testing
+data/
+
+#Mac stuff
+.DS_store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
