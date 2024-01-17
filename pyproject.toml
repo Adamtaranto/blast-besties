@@ -8,7 +8,7 @@ authors = [{ name = "Adam Taranto", email = "adam.p.taranto@gmail.com" }]
 
 description = "Rapid discovery of reciprocal best blast pairs from BLAST output files."
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 license = { text = "MIT" }
 
 classifiers = [
