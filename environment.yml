@@ -1,0 +1,12 @@
+name: bbdev
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python 3.12
+  - blast
+  - pip
+  - pip:
+      - argparse_tui
+      - hatch
+      - pytest
