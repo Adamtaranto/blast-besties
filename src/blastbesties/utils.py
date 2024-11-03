@@ -11,7 +11,7 @@ def isfile(fileList: list):
             logging.error(f"Input file not found: {infile}")
             isMissing = True
     if isMissing:
-        logging.error(f"Exiting.")
+        logging.error("Exiting.")
         sys.exit(1)
 
 
