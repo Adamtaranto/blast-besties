@@ -1,12 +1,13 @@
 [build-system]
-requires = ["setuptools", "setuptools-scm"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
 
 [project]
 name = "blastbesties"
 authors = [{ name = "Adam Taranto", email = "adam.p.taranto@gmail.com" }]
 
 description = "Rapid discovery of reciprocal best blast pairs from BLAST output files."
+
 readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "MIT" }
@@ -18,14 +19,9 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
 ]
 
-dynamic = ["version", "dependencies"]
+dependencies = ["argparse_tui"]
 
-[tool.setuptools_scm]
-write_to = "src/blastbesties/_version.py"
-
-[tool.setuptools.dynamic]
-
-dependencies = { file = "requirements.txt" }
+dynamic = ["version"]
 
 [project.urls]
 homepage = "https://github.com/adamtaranto/blast-besties"
@@ -35,18 +31,22 @@ repository = "https://github.com/adamtaranto/blast-besties"
 [project.scripts]
 blastbesties = "blastbesties.app:main"
 
+[tool.hatch.build]
+source = "src"
 
-# Create and push tags
-# git tag -a v1.1.2 
-# git push origin v1.1.2
+exclude = [
+    "environment.yml",
+]
 
-# Check what setuptools_scm thinks the current version is and create _version.py
-# git describe
-# python -m setuptools_scm
-# python setup.py --version
+[tool.hatch.version]
+source = "vcs"
 
-# Build sdist
-# python setup.py sdist 
+[tool.hatch.version.vcs]
+tag-pattern = "v*"  # Git tags starting with 'v' will be used for versioning
+fallback-version = "0.0.0"
 
-# Push to pypi
-# twine upload dist/*
+[tool.hatch.build.hooks.vcs]
+version-file = "src/blastbesties/_version.py"
+
+[project.optional-dependencies]
+tests = ["pytest"]
