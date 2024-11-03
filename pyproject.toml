@@ -36,6 +36,8 @@ source = "src"
 
 exclude = [
     "environment.yml",
+    "env_osx64.yml",
+    ".github",
 ]
 
 [tool.hatch.version]
