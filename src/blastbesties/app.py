@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # .-. .-')               ('-.      .-')    .-') _          .-. .-')    ('-.    .-')    .-') _             ('-.    .-')
 # \  ( OO )             ( OO ).-. ( OO ). (  OO) )         \  ( OO ) _(  OO)  ( OO ). (  OO) )          _(  OO)  ( OO ).
 #  ;-----.\  ,--.       / . --. /(_)---\_)/     '._         ;-----.\(,------.(_)---\_)/     '._ ,-.-') (,------.(_)---\_)
@@ -10,12 +8,15 @@
 #  | '--'  / |      |   |  | |  |\       /   |  |           | '--'  /|  `---.\       /   |  | (_|  |    |  `---.\       /
 #  `------'  `------'   `--' `--' `-----'    `--'           `------' `------' `-----'    `--'   `--'    `------' `-----'
 
+import argparse
+import logging
+
+from argparse_tui import add_tui_argument
+
 from blastbesties.blastops import getPairs
 from blastbesties.utils import outPathCheck, isfile, writePairs
 from blastbesties._version import __version__
-
-import argparse
-import logging
+from blastbesties.logs import init_logging
 
 
 def mainArgs():
@@ -78,6 +79,9 @@ def mainArgs():
         choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
         help="Set logging level.",
     )
+    
+    add_tui_argument(parser, option_strings=["--tui"])
+    
     # Parse arguments
     args = parser.parse_args()
     # Call main function
@@ -89,14 +93,7 @@ def main():
     args = mainArgs()
 
     # Set up logging
-    numeric_level = getattr(logging, args.loglevel.upper(), None)
-
-    if not isinstance(numeric_level, int):
-        raise ValueError("Invalid log level: %s" % args.loglevel)
-
-    logging.basicConfig(
-        format="%(asctime)s:%(levelname)s:%(name)s:%(message)s", level=numeric_level
-    )
+    init_logging(loglevel=args.loglevel)
 
     # Check input files exist
     isfile([args.blastAvB, args.blastBvA])
