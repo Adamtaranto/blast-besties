@@ -1,17 +1,18 @@
+# Build system configuration
 [build-system]
 requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
+# Project metadata
 [project]
 name = "blastbesties"
 authors = [{ name = "Adam Taranto", email = "adam.p.taranto@gmail.com" }]
-
 description = "Rapid discovery of reciprocal best blast pairs from BLAST output files."
-
 readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "MIT" }
 
+# Classifiers for project categorization
 classifiers = [
     "Programming Language :: Python :: 3",
     "Intended Audience :: Science/Research",
@@ -19,36 +20,46 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
 ]
 
+# Project dependencies
 dependencies = ["argparse_tui"]
 
+# Dynamic versioning
 dynamic = ["version"]
 
+# Project URLs
 [project.urls]
 homepage = "https://github.com/adamtaranto/blast-besties"
 documentation = "https://github.com/adamtaranto/blast-besties"
 repository = "https://github.com/adamtaranto/blast-besties"
 
+# Command-line script entry point
 [project.scripts]
 blastbesties = "blastbesties.app:main"
 
+# Hatch build configuration
 [tool.hatch.build]
 source = "src"
 
+# Exclude files and directories from the build
 exclude = [
     "environment.yml",
     "env_osx64.yml",
     ".github",
 ]
 
+# Hatch versioning configuration
 [tool.hatch.version]
 source = "vcs"
 
+# Version control system (VCS) versioning
 [tool.hatch.version.vcs]
 tag-pattern = "v*"  # Git tags starting with 'v' will be used for versioning
 fallback-version = "0.0.0"
 
+# Version file location for VCS
 [tool.hatch.build.hooks.vcs]
 version-file = "src/blastbesties/_version.py"
 
+# Optional dependencies for testing
 [project.optional-dependencies]
 tests = ["pytest"]
