@@ -1,6 +1,7 @@
 import logging
 import sys
 
+
 def init_logging(loglevel="DEBUG"):
     """
     Initializes the logging system with a specified log level and custom formatter.
@@ -19,18 +20,20 @@ def init_logging(loglevel="DEBUG"):
 
     # Define log message format
     fmt = "%(asctime)s | %(levelname)s | %(message)s"
-    
+
     # Create a StreamHandler to output log messages to stderr
     handler_sh = logging.StreamHandler(sys.stderr)
     handler_sh.setFormatter(CustomFormatter(fmt))
-    
+
     # Configure the logging system
     logging.basicConfig(format=fmt, level=numeric_level, handlers=[handler_sh])
+
 
 class CustomFormatter(logging.Formatter):
     """
     Custom logging formatter to add color to log messages based on their severity level.
     """
+
     # Adapted from https://alexandra-zaharia.github.io/posts/make-your-own-custom-color-formatter-with-python-logging
     # ANSI escape codes for colors
     grey = "\x1b[38;21m"

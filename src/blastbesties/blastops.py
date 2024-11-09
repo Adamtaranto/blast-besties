@@ -1,6 +1,7 @@
 from collections import Counter
 import logging
 
+
 def getPairs(blastAvB, blastBvA, minLen=1, eVal=0.001, bitScore=0):
     """
     Reads in two BLAST tabular output files and returns a list of pairs which are reciprocal best BLAST hits.
@@ -16,7 +17,9 @@ def getPairs(blastAvB, blastBvA, minLen=1, eVal=0.001, bitScore=0):
     list: A list of tuples representing reciprocal best BLAST hit pairs.
     """
     logging.info(f"Retrieving reciprocal best hits between {blastAvB} and {blastBvA}")
-    logging.info(f"Filtering BLAST hits: minLen={minLen}, eVal={eVal}, bitScore={bitScore}")
+    logging.info(
+        f"Filtering BLAST hits: minLen={minLen}, eVal={eVal}, bitScore={bitScore}"
+    )
 
     pairs = []
 
@@ -67,6 +70,8 @@ def getPairs(blastAvB, blastBvA, minLen=1, eVal=0.001, bitScore=0):
 
     # Identify reciprocal best pairs
     recipPairs = [k for (k, v) in Counter(pairs).items() if v > 1]
-    logging.info(f"Found {len(recipPairs)} reciprocal best BLAST pairs passing match criteria.")
+    logging.info(
+        f"Found {len(recipPairs)} reciprocal best BLAST pairs passing match criteria."
+    )
 
     return recipPairs

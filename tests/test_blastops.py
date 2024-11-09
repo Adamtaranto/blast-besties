@@ -34,6 +34,7 @@ subject2\tquery2\t99.00\t100\t1\t0\t1\t100\t1\t100\t1e-40\t180
 subject3\tquery3\t98.00\t100\t2\t0\t1\t100\t1\t100\t1e-30\t160
 """
 
+
 @pytest.fixture
 def create_blast_files(tmp_path):
     blastAvB = tmp_path / "blastAvB.txt"
@@ -41,6 +42,7 @@ def create_blast_files(tmp_path):
     blastAvB.write_text(blastAvB_data)
     blastBvA.write_text(blastBvA_data)
     return blastAvB, blastBvA
+
 
 @pytest.fixture
 def create_filtered_blast_files(tmp_path):
@@ -50,6 +52,7 @@ def create_filtered_blast_files(tmp_path):
     blastBvA.write_text(blastBvA_data_filtered)
     return blastAvB, blastBvA
 
+
 @pytest.fixture
 def create_partial_blast_files(tmp_path):
     blastAvB = tmp_path / "blastAvB_partial.txt"
@@ -58,23 +61,27 @@ def create_partial_blast_files(tmp_path):
     blastBvA.write_text(blastBvA_data_partial)
     return blastAvB, blastBvA
 
+
 def test_getPairs(create_blast_files):
     blastAvB, blastBvA = create_blast_files
     result = getPairs(blastAvB, blastBvA)
-    expected = [('query1', 'subject1'), ('query2', 'subject2'), ('query3', 'subject3')]
+    expected = [("query1", "subject1"), ("query2", "subject2"), ("query3", "subject3")]
     assert result == expected
-    
+
+
 def test_getPairs_filtered(create_filtered_blast_files):
     blastAvB, blastBvA = create_filtered_blast_files
     result = getPairs(blastAvB, blastBvA, eVal=1e-25)
-    expected = [('query1', 'subject1'), ('query2', 'subject2')]
+    expected = [("query1", "subject1"), ("query2", "subject2")]
     assert result == expected
+
 
 def test_getPairs_partial(create_partial_blast_files):
     blastAvB, blastBvA = create_partial_blast_files
     result = getPairs(blastAvB, blastBvA)
-    expected = [('query1', 'subject1'), ('query2', 'subject2')]
+    expected = [("query1", "subject1"), ("query2", "subject2")]
     assert result == expected
+
 
 def test_getPairs_minLen(create_blast_files):
     blastAvB, blastBvA = create_blast_files
@@ -82,8 +89,9 @@ def test_getPairs_minLen(create_blast_files):
     expected = []
     assert result == expected
 
+
 def test_getPairs_bitScore(create_blast_files):
     blastAvB, blastBvA = create_blast_files
     result = getPairs(blastAvB, blastBvA, bitScore=180)
-    expected = [('query1', 'subject1'), ('query2', 'subject2')]
+    expected = [("query1", "subject1"), ("query2", "subject2")]
     assert result == expected
