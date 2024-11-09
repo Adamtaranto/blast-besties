@@ -28,8 +28,8 @@ jobs:
     - name: Build the package with Hatch
       run: hatch build
 
-    - name: Publish to PyPI
-      env:
-        HATCH_INDEX_USER: __token__
-        HATCH_INDEX_AUTH: ${{ secrets.BB_PYPI_TOKEN }}
-      run: hatch publish
+    - name: Publish package distributions to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+          verbose: true
+          print-hash: true
