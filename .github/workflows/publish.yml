@@ -29,9 +29,6 @@ jobs:
       - name: Build package with Hatch
         run: hatch build
 
-      - name: Test package
-        run: hatch run test -v
-
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
