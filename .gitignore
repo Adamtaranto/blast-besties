@@ -1,10 +1,10 @@
-#Versioning
+# Versioning
 src/blastbesties/_version.py
 
-#Testing
+# Testing
 data/
 
-#Mac stuff
+# Mac stuff
 .DS_store
 
 # Byte-compiled / optimized / DLL files
