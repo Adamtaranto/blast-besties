@@ -22,23 +22,24 @@ Rapid discovery of reciprocal best blast pairs from BLAST output files.
 
 There are 3 options available for installing Blast-Besties locally:
 
-1) Clone from this repository and install as a local Python package.
+1) Install from PyPi.
 
 ```bash
-git clone https://github.com/Adamtaranto/blast-besties.git && cd blast-besties && pip install -e .
+pip install blastbesties
 ```
 
-1) Pip install directly from this git repository.
+2) Pip install latest development version directly from this git repository.
 
 ```bash
 pip install git+https://github.com/Adamtaranto/blast-besties.git
 ```
 
-3) Install from PyPi.
+3) Clone from this repository and install as a local Python package if you want to edit the code.
 
 ```bash
-pip install blastbesties
+git clone https://github.com/Adamtaranto/blast-besties.git && cd blast-besties && pip install -e ".[tests]"
 ```
+
 
 ## Example usage
 
@@ -57,6 +58,13 @@ Report reciprocal best match pairs where each hit meets criteria e-value
 blastbesties -e 0.001 -l 40 -s 100 -a AvB.tab -b BvA.tab -o pairs.tab
 ```
 
+To run in interactive mode use `--tui` to open the terminal user interface.
+
+```bash
+blastbesties --tui
+```
+
+
 ### Input requirements
 
   - Takes two BLAST output files as input. SetA vs SetB, and SetB vs SetA.
@@ -66,29 +74,29 @@ blastbesties -e 0.001 -l 40 -s 100 -a AvB.tab -b BvA.tab -o pairs.tab
 ### Standard options
 
 ```
-Usage: blastbesties [-h] [-v] -a BLASTAVB -b BLASTBVA [-l MINLEN] [-e EVAL]
-                     [-s BITSCORE] [-o OUTFILE] [-d OUTDIR]
+Usage: blastbesties [-h] [--version] -a BLASTAVB -b BLASTBVA [-l MINLEN] [-e EVAL] [-s BITSCORE] [-o OUTFILE] [-d OUTDIR] [--loglevel {DEBUG,INFO,WARNING,ERROR,CRITICAL}] [--tui]
 
-Options:
+Finds reciprocal best BLAST pairs from BLAST output format 6 (tabular). Where hits are sorted by query name then descending match quality.
 
-  # Info
-  -h, --help        Show this help message and exit.
-  -v, --version     Show program's version number and exit.
-  
-  # Input 
-  -a, --blastAvB    Blast tab result file for fastaA query against fastaB
-                    subject.
-  -b, --blastBvA    Blast tab result file for fastaB query against fastaA
-                    subject.
-  
-  # Settings
-  -l, --minLen      Minimum length of hit to consider valid.
-  -e, --eVal        Maximum e-value to consider valid pair.
-  -s, --bitScore    Minimum bitscore to consider valid pair.
-
-  # Output
-  -o, --outFile     Write reciprocal blast pairs to this file.
-  -d, --outDir      Directory for new sequence files to be written to.
+options:
+  -h, --help            show this help message and exit
+  --version             Show program's version number and exit.
+  -a BLASTAVB, --blastAvB BLASTAVB
+                        BLAST tab result file for fastaA query against fastaB subject.
+  -b BLASTBVA, --blastBvA BLASTBVA
+                        BLAST tab result file for fastaB query against fastaA subject.
+  -l MINLEN, --minLen MINLEN
+                        Minimum length of hit to consider valid. Defaults to 1.
+  -e EVAL, --eVal EVAL  Maximum e-value to consider valid pair. Defaults to 0.001.
+  -s BITSCORE, --bitScore BITSCORE
+                        Minimum bitscore to consider valid pair. Defaults to 1.0.
+  -o OUTFILE, --outFile OUTFILE
+                        Write reciprocal BLAST pairs to this file.
+  -d OUTDIR, --outDir OUTDIR
+                        Directory for new sequence files to be written to.
+  --loglevel {DEBUG,INFO,WARNING,ERROR,CRITICAL}
+                        Set logging level. Defaults to INFO.
+  --tui                 Open Textual UI.
 ```
 
 ## License
