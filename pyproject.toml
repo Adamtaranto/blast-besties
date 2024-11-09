@@ -45,6 +45,7 @@ exclude = [
     "environment.yml",
     "env_osx64.yml",
     ".github",
+    ".vscode",
 ]
 
 # Hatch versioning configuration
